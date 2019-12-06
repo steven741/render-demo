@@ -3,6 +3,11 @@
 in vec3 inPos;
 in vec2 inTex;
 
+in vec3  modelPos;
+in vec3  modelScale;
+in vec3  modelRotAxis;
+in float modelRotAngle;
+
 out vec2 tex_st;
 
 
@@ -27,9 +32,9 @@ mat4 scale(vec3 a) {
 
 mat4 translate(vec3 p) {
   return mat4(
-    1.0, 0.0,  0.0, 0.0,
-    0.0, 1.0,  0.0, 0.0,
-    0.0, 0.0,  1.0, 0.0,
+    1.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0,
+    0.0, 0.0, 1.0, 0.0,
     p.x, p.y, p.z, 1.0
   );
 }
@@ -40,21 +45,19 @@ mat4 rotation(vec3 axis, float angle) {
   float c = cos(angle);
   float oc = 1.0 - c;
 
-  return mat4(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
-              oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
-              oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
-              0.0,                                0.0,                                0.0,                                1.0);
+  return mat4(
+    oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
+    oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
+    oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
+    0.0,                                0.0,                                0.0,                                1.0);
 }
 
-mat4 model = rotation(vec3(0.0, 1.0, 0.0), 45.0 * PI/180.0);
 
-uniform mat4 view  = mat4(
-  1.0, 0.0,  0.0, 0.0,
-  0.0, 1.0,  0.0, 0.0,
-  0.0, 0.0,  1.0, 0.0,
-  0.0, 0.0, -3.0, 1.0);
+mat4 model = translate(modelPos) * scale(modelScale) * rotation(modelRotAxis, modelRotAngle);
 
-uniform mat4 proj  = mat4(
+mat4 view = translate(vec3(0.0, 0.0, -3.0));
+
+mat4 proj = mat4(
   d/a, 0.0,             0.0,  0.0,
   0.0,   d,             0.0,  0.0,
   0.0, 0.0,     (n+f)/(n-f), -1.0,

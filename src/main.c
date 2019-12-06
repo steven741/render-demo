@@ -254,6 +254,18 @@ int main(int argc, char* argv[]) {
   glEnableVertexAttribArray(shader_tex_loc);
 
 
+  //
+  GLint shader_mPos_loc      = glGetAttribLocation(program_shader, "modelPos");
+  GLint shader_mSca_loc      = glGetAttribLocation(program_shader, "modelScale");
+  GLint shader_mRotAxis_loc  = glGetAttribLocation(program_shader, "modelRotAxis");
+  GLint shader_mRotAngle_loc = glGetAttribLocation(program_shader, "modelRotAngle");
+
+  glVertexAttrib3f(shader_mPos_loc, 0.0f, 0.0f, 0.0f);
+  glVertexAttrib3f(shader_mSca_loc, 1.0f, 1.0f, 1.0f);
+  glVertexAttrib3f(shader_mRotAxis_loc, 0.0f, 0.0f, 0.0f);
+  glVertexAttrib1f(shader_mRotAngle_loc, 0.0f);
+
+
   // Load an image
   GLuint tex = load_bmp("src/container.bmp");
 
@@ -266,7 +278,11 @@ int main(int argc, char* argv[]) {
 
   SDL_Event event;
 
+  float t = 0.0f;
+
   for (;;) {
+    Uint64 t0 = SDL_GetPerformanceCounter();
+
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
       case SDL_QUIT:
@@ -283,6 +299,10 @@ int main(int argc, char* argv[]) {
     }
 
 
+    glVertexAttrib3f(shader_mRotAxis_loc, 0.0f, 1.0f, 0.0f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t);
+
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glBindVertexArray(vao);
@@ -290,5 +310,10 @@ int main(int argc, char* argv[]) {
     glDrawArrays(GL_TRIANGLES, 0, 36);
 
     SDL_GL_SwapWindow(window);
+
+    // Calculate dt
+    Uint64 t1 = SDL_GetPerformanceCounter();
+    float dt = (float)(t1-t0)/SDL_GetPerformanceFrequency();
+    t += dt;
   }
 }
