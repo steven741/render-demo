@@ -191,19 +191,19 @@ int main(int argc, char* argv[]) {
   FILE* vertex_file = fopen("src/main.vert", "rb");
   FILE* fragment_file = fopen("src/main.frag", "rb");
 
-  char vertex_source[2048];
-  char fragment_source[2028];
+  char vertex_source[4096];
+  char fragment_source[4096];
 
   char* vertex_sources[1] = { vertex_source };
   char* fragment_sources[1] = { fragment_source };
 
-  for (int i=0, c='\0'; c != EOF && i < 2048; ++i)
+  for (int i=0, c='\0'; c != EOF && i < 4096; ++i)
     if ((c=fgetc(vertex_file)) != EOF)
       vertex_source[i] = c;
     else
       vertex_source[i] = '\0';
 
-  for (int i=0, c='\0'; c != EOF && i < 2048; ++i)
+  for (int i=0, c='\0'; c != EOF && i < 4096; ++i)
     if ((c=fgetc(fragment_file)) != EOF)
       fragment_source[i] = c;
     else
@@ -301,6 +301,7 @@ int main(int argc, char* argv[]) {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    // Draw 11 cubes in different places.
     glVertexAttrib3f(shader_mRotAxis_loc, 0.0f, 1.0f, 0.0f);
     glVertexAttrib1f(shader_mRotAngle_loc, t);
     glVertexAttrib3f(shader_mPos_loc, 0.0f, 0.0f, 0.0f);

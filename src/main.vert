@@ -21,13 +21,27 @@ const float n   = 0.1;               // near
 const float f   = 100.0;             // far
 const float d   = 1.0 / tan(fov/2.0);
 
+mat4 lookAt(vec3 eye, vec3 target, vec3 up) {
+  vec3 f = normalize(eye - target);
+  vec3 l = normalize(cross(up, f));
+  vec3 u = cross(f, l);
+
+  return mat4(
+    l.x, u.x, f.x, 0.0,
+    l.y, u.y, f.y, 0.0,
+    l.z, u.z, f.z, 0.0,
+    -l.x*eye.x - l.y*eye.y - l.z*eye.z,
+    -u.x*eye.x - u.y*eye.y - u.z*eye.z,
+    -f.x*eye.x - f.y*eye.y - f.z*eye.z,
+    1.0);
+}
+
 mat4 scale(vec3 a) {
   return mat4(
     a.x, 0.0, 0.0, 0.0,
     0.0, a.y, 0.0, 0.0,
     0.0, 0.0, a.z, 0.0,
-    0.0, 0.0, 0.0, 1.0
-  );
+    0.0, 0.0, 0.0, 1.0);
 }
 
 mat4 translate(vec3 p) {
@@ -35,8 +49,7 @@ mat4 translate(vec3 p) {
     1.0, 0.0, 0.0, 0.0,
     0.0, 1.0, 0.0, 0.0,
     0.0, 0.0, 1.0, 0.0,
-    p.x, p.y, p.z, 1.0
-  );
+    p.x, p.y, p.z, 1.0);
 }
 
 mat4 rotation(vec3 axis, float angle) {
