@@ -299,12 +299,81 @@ int main(int argc, char* argv[]) {
     }
 
 
-    glVertexAttrib3f(shader_mRotAxis_loc, 0.0f, 1.0f, 0.0f);
-    glVertexAttrib1f(shader_mRotAngle_loc, t);
-
-
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    glVertexAttrib3f(shader_mRotAxis_loc, 0.0f, 1.0f, 0.0f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t);
+    glVertexAttrib3f(shader_mPos_loc, 0.0f, 0.0f, 0.0f);
+    glBindVertexArray(vao);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glVertexAttrib3f(shader_mRotAxis_loc, 1.0f, 0.3f, 0.5f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t + 20.0f);
+    glVertexAttrib3f(shader_mPos_loc, 2.0f, 5.0f, -15.0f);
+    glBindVertexArray(vao);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glVertexAttrib3f(shader_mPos_loc, 1.0f, 0.3f, 0.5f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t + 20.0f);
+    glVertexAttrib3f(shader_mPos_loc, 2.0f, 5.0f, -15.0f);
+    glBindVertexArray(vao);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glVertexAttrib3f(shader_mPos_loc, 1.0f, 0.3f, 0.5f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t + 40.0f);
+    glVertexAttrib3f(shader_mPos_loc, -1.5f, -2.2f, -2.5f);
+    glBindVertexArray(vao);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glVertexAttrib3f(shader_mPos_loc, 1.0f, 0.3f, 0.5f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t + 60.0f);
+    glVertexAttrib3f(shader_mPos_loc, -3.8f, -2.0f, -12.3f);
+    glBindVertexArray(vao);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glVertexAttrib3f(shader_mPos_loc, 1.0f, 0.3f, 0.5f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t + 80.0f);
+    glVertexAttrib3f(shader_mPos_loc, 2.4f, -0.4f, -3.5f);
+    glBindVertexArray(vao);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glVertexAttrib3f(shader_mPos_loc, 1.0f, 0.3f, 0.5f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t + 100.0f);
+    glVertexAttrib3f(shader_mPos_loc, -1.7f,  3.0f, -7.5f);
+    glBindVertexArray(vao);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glVertexAttrib3f(shader_mPos_loc, 1.0f, 0.3f, 0.5f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t + 120.0f);
+    glVertexAttrib3f(shader_mPos_loc, 1.3f, -2.0f, -2.5f);
+    glBindVertexArray(vao);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glVertexAttrib3f(shader_mPos_loc, 1.0f, 0.3f, 0.5f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t + 140.0f);
+    glVertexAttrib3f(shader_mPos_loc, 1.5f,  2.0f, -2.5f);
+    glBindVertexArray(vao);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glVertexAttrib3f(shader_mPos_loc, 1.0f, 0.3f, 0.5f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t + 160.0f);
+    glVertexAttrib3f(shader_mPos_loc, 1.5f,  0.2f, -1.5f);
+    glBindVertexArray(vao);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glVertexAttrib3f(shader_mPos_loc, 1.0f, 0.3f, 0.5f);
+    glVertexAttrib1f(shader_mRotAngle_loc, t + 180.0f);
+    glVertexAttrib3f(shader_mPos_loc, -1.3f,  1.0f, -1.5f);
     glBindVertexArray(vao);
     glBindTexture(GL_TEXTURE_2D, tex);
     glDrawArrays(GL_TRIANGLES, 0, 36);
